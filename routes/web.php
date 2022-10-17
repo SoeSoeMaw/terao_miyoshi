@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('home');
+});
+Route::group(['prefix' => 'user','as' => 'user.'], function()   {
+    Route::get('/home', [WelcomeController::class, 'home'])->name('home');
+    Route::get('/about', [WelcomeController::class, 'about'])->name('about');
+    Route::get('/contact', [WelcomeController::class, 'contact'])->name('contact');
+    // Route::get('/home', 'WelcomeController@home')->name('home');
+    // Route::get('/about',function(){
+    //     return view('about');
+    // })->name('about');;
+    // Route::get('/contact',function(){
+    //     return view('contact');
+    // })->name('contact');;
 });
